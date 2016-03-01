@@ -761,12 +761,12 @@ class HTMLReportCreator(ReportCreator):
 		f.write('<dt>项目名称</dt><dd>%s</dd>' % (data.projectname))
 		f.write('<dt>生成时间</dt><dd>%s (in %d seconds)</dd>' % (datetime.datetime.now().strftime(format), time.time() - data.getStampCreated()))
 		f.write('<dt>版本详情</dt><dd><a href="http://gitstats.sourceforge.net/">GitStats</a> (version %s), %s, %s</dd>' % (getversion(), getgitversion(), getgnuplotversion()))
-		f.write('<dt>报告周期</dt><dd>%s 到 %s</dd>' % (data.getFirstCommitDate().strftime(format), data.getLastCommitDate().strftime(format)))
+		f.write('<dt>报告周期</dt><dd>从 %s 到 %s</dd>' % (data.getFirstCommitDate().strftime(format), data.getLastCommitDate().strftime(format)))
 		f.write('<dt>时长</dt><dd> 总天数：%d  ,  活跃天数： %d   ，  百分比：(%3.2f%%)</dd>' % (data.getCommitDeltaDays(), len(data.getActiveDays()), (100.0 * len(data.getActiveDays()) / data.getCommitDeltaDays())))
 		f.write('<dt>总文件数</dt><dd>%s</dd>' % data.getTotalFiles())
 		f.write('<dt>总行数of Code</dt><dd>%s (%d 添加, %d 删除)</dd>' % (data.getTotalLOC(), data.total_lines_added, data.total_lines_removed))
-		f.write('<dt>总提交数</dt><dd>%s (平均每活跃天 %.1f 个提交,  平均每天%.1f 个提交)</dd>' % (data.getTotalCommits(), float(data.getTotalCommits()) / len(data.getActiveDays()), float(data.getTotalCommits()) / data.getCommitDeltaDays()))
-		f.write('<dt>开发人员</dt><dd>%s (平均每个开发人员提交 %.1f 个)</dd>' % (data.getTotalAuthors(), (1.0 * data.getTotalCommits()) / data.getTotalAuthors()))
+		f.write('<dt>总提交数</dt><dd>%s (在活跃天平均每天 %.1f 个提交次数,  整体每天平均%.1f 个提交次数)</dd>' % (data.getTotalCommits(), float(data.getTotalCommits()) / len(data.getActiveDays()), float(data.getTotalCommits()) / data.getCommitDeltaDays()))
+		f.write('<dt>开发人员</dt><dd>%s (平均每个开发人员提交次数 %.1f 个)</dd>' % (data.getTotalAuthors(), (1.0 * data.getTotalCommits()) / data.getTotalAuthors()))
 		f.write('</dl>')
 
 		f.write('</body>\n</html>')
@@ -1393,12 +1393,12 @@ plot """
 		f.write("""
 <div class="nav">
 <ul>
-<li><a href="index.html">General</a></li>
-<li><a href="activity.html">Activity</a></li>
-<li><a href="authors.html">Authors</a></li>
-<li><a href="files.html">Files</a></li>
-<li><a href="lines.html">Lines</a></li>
-<li><a href="tags.html">Tags</a></li>
+<li><a href="index.html">整体统计</a></li>
+<li><a href="activity.html">活动统计</a></li>
+<li><a href="authors.html">开发人员统计</a></li>
+<li><a href="files.html">文件统计</a></li>
+<li><a href="lines.html">行数统计</a></li>
+<li><a href="tags.html">Tag统计</a></li>
 </ul>
 </div>
 """)
