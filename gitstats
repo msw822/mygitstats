@@ -758,7 +758,7 @@ class HTMLReportCreator(ReportCreator):
 		self.printNav(f)
 
 		f.write('<dl>')
-		f.write('<dt>Project name</dt><dd>%s</dd>' % (data.projectname))
+		f.write('<dt>项目名称</dt><dd>%s</dd>' % (data.projectname))
 		f.write('<dt>Generated</dt><dd>%s (in %d seconds)</dd>' % (datetime.datetime.now().strftime(format), time.time() - data.getStampCreated()))
 		f.write('<dt>Generator</dt><dd><a href="http://gitstats.sourceforge.net/">GitStats</a> (version %s), %s, %s</dd>' % (getversion(), getgitversion(), getgnuplotversion()))
 		f.write('<dt>Report Period</dt><dd>%s to %s</dd>' % (data.getFirstCommitDate().strftime(format), data.getLastCommitDate().strftime(format)))
