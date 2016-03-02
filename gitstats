@@ -753,7 +753,7 @@ class HTMLReportCreator(ReportCreator):
 		format = '%Y-%m-%d %H:%M:%S'
 		self.printHeader(f)
 
-		f.write('<h1>GitStats - %s</h1>' % data.projectname)
+		f.write('<h1>中移在线项目 - %s</h1>' % data.projectname)
 
 		self.printNav(f)
 
@@ -765,7 +765,7 @@ class HTMLReportCreator(ReportCreator):
 		f.write('<dt>时长</dt><dd> 总天数：%d  ,  活跃天数： %d   ，  百分比：(%3.2f%%)</dd>' % (data.getCommitDeltaDays(), len(data.getActiveDays()), (100.0 * len(data.getActiveDays()) / data.getCommitDeltaDays())))
 		f.write('<dt>总文件数</dt><dd>%s</dd>' % data.getTotalFiles())
 		f.write('<dt>总行数of Code</dt><dd>%s (%d 添加, %d 删除)</dd>' % (data.getTotalLOC(), data.total_lines_added, data.total_lines_removed))
-		f.write('<dt>总提交数</dt><dd>%s (在活跃天平均每天 %.1f 个提交次数,  整体每天平均%.1f 个提交次数)</dd>' % (data.getTotalCommits(), float(data.getTotalCommits()) / len(data.getActiveDays()), float(data.getTotalCommits()) / data.getCommitDeltaDays()))
+		f.write('<dt>总提交数</dt><dd>%s (活跃天平均每天 %.1f 个提交次数,  整体平均每天%.1f 个提交次数)</dd>' % (data.getTotalCommits(), float(data.getTotalCommits()) / len(data.getActiveDays()), float(data.getTotalCommits()) / data.getCommitDeltaDays()))
 		f.write('<dt>开发人员</dt><dd>%s (平均每个开发人员提交次数 %.1f 个)</dd>' % (data.getTotalAuthors(), (1.0 * data.getTotalCommits()) / data.getTotalAuthors()))
 		f.write('</dl>')
 
@@ -785,8 +785,8 @@ class HTMLReportCreator(ReportCreator):
 
 		# Weekly activity
 		WEEKS = 32
-		f.write(html_header(2, 'Weekly activity'))
-		f.write('<p>Last %d weeks</p>' % WEEKS)
+		f.write(html_header(2, '按周统计'))
+		f.write('<p>最近 %d 周</p>' % WEEKS)
 
 		# generate weeks to show (previous N weeks from now)
 		now = datetime.datetime.now()
@@ -817,7 +817,7 @@ class HTMLReportCreator(ReportCreator):
 		f.write('</tr></table>')
 
 		# Hour of Day
-		f.write(html_header(2, 'Hour of Day'))
+		f.write(html_header(2, '按小时统计'))
 		hour_of_day = data.getActivityByHourOfDay()
 		f.write('<table><tr><th>Hour</th>')
 		for i in range(0, 24):
