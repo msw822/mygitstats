@@ -919,7 +919,7 @@ class HTMLReportCreator(ReportCreator):
 		f.write('<img src="month_of_year.png" alt="Month of Year">')
 
 		# Commits by year/month
-		f.write(html_header(2, 'Commits by year/month'))
+		f.write(html_header(2, '按月/年统计'))
 		f.write('<div class="vtable"><table><tr><th>Month</th><th>Commits</th><th>Lines added</th><th>Lines removed</th></tr>')
 		for yymm in reversed(sorted(data.commits_by_month.keys())):
 			f.write('<tr><td>%s</td><td>%d</td><td>%d</td><td>%d</td></tr>' % (yymm, data.commits_by_month.get(yymm,0), data.lines_added_by_month.get(yymm,0), data.lines_removed_by_month.get(yymm,0)))
@@ -931,7 +931,7 @@ class HTMLReportCreator(ReportCreator):
 		fg.close()
 
 		# Commits by year
-		f.write(html_header(2, 'Commits by Year'))
+		f.write(html_header(2, '按年统计'))
 		f.write('<div class="vtable"><table><tr><th>Year</th><th>Commits (% of all)</th><th>Lines added</th><th>Lines removed</th></tr>')
 		for yy in reversed(sorted(data.commits_by_year.keys())):
 			f.write('<tr><td>%s</td><td>%d (%.2f%%)</td><td>%d</td><td>%d</td></tr>' % (yy, data.commits_by_year.get(yy,0), (100.0 * data.commits_by_year.get(yy,0)) / data.getTotalCommits(), data.lines_added_by_year.get(yy,0), data.lines_removed_by_year.get(yy,0)))
@@ -943,7 +943,7 @@ class HTMLReportCreator(ReportCreator):
 		fg.close()
 
 		# Commits by timezone
-		f.write(html_header(2, 'Commits by Timezone'))
+		f.write(html_header(2, '按时区统计'))
 		f.write('<table><tr>')
 		f.write('<th>Timezone</th><th>Commits</th>')
 		f.write('</tr>')
@@ -962,14 +962,14 @@ class HTMLReportCreator(ReportCreator):
 		f = open(path + '/authors.html', 'w')
 		self.printHeader(f)
 
-		f.write('<h1>Authors</h1>')
+		f.write('<h1>开发人员统计</h1>')
 		self.printNav(f)
 
 		# Authors :: List of authors
-		f.write(html_header(2, 'List of Authors'))
+		f.write(html_header(2, '开发人员列表'))
 
 		f.write('<table class="authors sortable" id="authors">')
-		f.write('<tr><th>Author</th><th>Commits (%)</th><th>+ lines</th><th>- lines</th><th>First commit</th><th>Last commit</th><th class="unsortable">Age</th><th>Active days</th><th># by commits</th></tr>')
+		f.write('<tr><th>开发人员</th><th>提交量 (%)</th><th>添加+行数</th><th>删除-行数</th><th>第一次提交</th><th>最后一次提交</th><th class="unsortable">时长</th><th>活跃天数</th><th># 排行榜</th></tr>')
 		for author in data.getAuthors(conf['max_authors']):
 			info = data.getAuthorInfo(author)
 			f.write('<tr><td>%s</td><td>%d (%.2f%%)</td><td>%d</td><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%d</td><td>%d</td></tr>' % (author, info['commits'], info['commits_frac'], info['lines_added'], info['lines_removed'], info['date_first'], info['date_last'], info['timedelta'], len(info['active_days']), info['place_by_commits']))
