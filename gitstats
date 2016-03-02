@@ -906,7 +906,7 @@ class HTMLReportCreator(ReportCreator):
 		# Month of Year
 		f.write(html_header(2, '按月/年统计'))
 		f.write('<div class="vtable"><table>')
-		f.write('<tr><th>Month</th><th>提交量 (%)</th></tr>')
+		f.write('<tr><th>月份</th><th>提交量 (%)</th></tr>')
 		fp = open (path + '/month_of_year.dat', 'w')
 		for mm in range(1, 13):
 			commits = 0
@@ -1074,20 +1074,20 @@ class HTMLReportCreator(ReportCreator):
 		# Files
 		f = open(path + '/files.html', 'w')
 		self.printHeader(f)
-		f.write('<h1>Files</h1>')
+		f.write('<h1>文件统计</h1>')
 		self.printNav(f)
 
 		f.write('<dl>\n')
-		f.write('<dt>Total files</dt><dd>%d</dd>' % data.getTotalFiles())
-		f.write('<dt>Total lines</dt><dd>%d</dd>' % data.getTotalLOC())
+		f.write('<dt>总文件个数</dt><dd>%d</dd>' % data.getTotalFiles())
+		f.write('<dt>总行数</dt><dd>%d</dd>' % data.getTotalLOC())
 		try:
-			f.write('<dt>Average file size</dt><dd>%.2f bytes</dd>' % (float(data.getTotalSize()) / data.getTotalFiles()))
+			f.write('<dt>平均文件大小</dt><dd>%.2f bytes</dd>' % (float(data.getTotalSize()) / data.getTotalFiles()))
 		except ZeroDivisionError:
 			pass
 		f.write('</dl>\n')
 
 		# Files :: File count by date
-		f.write(html_header(2, 'File count by date'))
+		f.write(html_header(2, '按日期统计'))
 
 		# use set to get rid of duplicate/unnecessary entries
 		files_by_date = set()
@@ -1106,8 +1106,8 @@ class HTMLReportCreator(ReportCreator):
 		#f.write('<h2>Average file size by date</h2>')
 
 		# Files :: Extensions
-		f.write(html_header(2, 'Extensions'))
-		f.write('<table class="sortable" id="ext"><tr><th>Extension</th><th>Files (%)</th><th>Lines (%)</th><th>Lines/file</th></tr>')
+		f.write(html_header(2, '按文件类型统计'))
+		f.write('<table class="sortable" id="ext"><tr><th>文件类型</th><th>文件个数 (%)</th><th>总行数 (%)</th><th>平均每文件行数</th></tr>')
 		for ext in sorted(data.extensions.keys()):
 			files = data.extensions[ext]['files']
 			lines = data.extensions[ext]['lines']
@@ -1125,14 +1125,14 @@ class HTMLReportCreator(ReportCreator):
 		# Lines
 		f = open(path + '/lines.html', 'w')
 		self.printHeader(f)
-		f.write('<h1>Lines</h1>')
+		f.write('<h1>行数统计</h1>')
 		self.printNav(f)
 
 		f.write('<dl>\n')
-		f.write('<dt>Total lines</dt><dd>%d</dd>' % data.getTotalLOC())
+		f.write('<dt>总行数</dt><dd>%d</dd>' % data.getTotalLOC())
 		f.write('</dl>\n')
 
-		f.write(html_header(2, 'Lines of Code'))
+		f.write(html_header(2, '文件行数变化统计'))
 		f.write('<img src="lines_of_code.png" alt="Lines of Code">')
 
 		fg = open(path + '/lines_of_code.dat', 'w')
@@ -1147,17 +1147,17 @@ class HTMLReportCreator(ReportCreator):
 		# tags.html
 		f = open(path + '/tags.html', 'w')
 		self.printHeader(f)
-		f.write('<h1>Tags</h1>')
+		f.write('<h1>Tag 统计</h1>')
 		self.printNav(f)
 
 		f.write('<dl>')
-		f.write('<dt>Total tags</dt><dd>%d</dd>' % len(data.tags))
+		f.write('<dt>总 tags</dt><dd>%d</dd>' % len(data.tags))
 		if len(data.tags) > 0:
-			f.write('<dt>Average commits per tag</dt><dd>%.2f</dd>' % (1.0 * data.getTotalCommits() / len(data.tags)))
+			f.write('<dt>每个tag平均提交量</dt><dd>%.2f</dd>' % (1.0 * data.getTotalCommits() / len(data.tags)))
 		f.write('</dl>')
 
 		f.write('<table class="tags">')
-		f.write('<tr><th>Name</th><th>Date</th><th>Commits</th><th>Authors</th></tr>')
+		f.write('<tr><th>tag名称</th><th>日期</th><th>提交数</th><th>开发人员</th></tr>')
 		# sort the tags by date desc
 		tags_sorted_by_date_desc = map(lambda el : el[1], reversed(sorted(map(lambda el : (el[1]['date'], el[0]), data.tags.items()))))
 		for tag in tags_sorted_by_date_desc:
