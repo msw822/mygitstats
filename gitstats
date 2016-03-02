@@ -862,7 +862,7 @@ class HTMLReportCreator(ReportCreator):
 			commits = 0
 			if d in day_of_week:
 				commits = day_of_week[d]
-			fp.write('%d %s %d\n' % (d + 1, WEEKDAYS_CN[d], commits))
+			fp.write('%d %s %d\n' % (d + 1, WEEKDAYS[d], commits))
 			f.write('<tr>')
 			f.write('<th>%s</th>' % (WEEKDAYS_CN[d]))
 			if d in day_of_week:
