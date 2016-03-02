@@ -28,6 +28,7 @@ os.environ['LC_ALL'] = 'C'
 GNUPLOT_COMMON = 'set terminal png transparent size 640,240\nset size 1.0,1.0\n'
 ON_LINUX = (platform.system() == 'Linux')
 WEEKDAYS = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+WEEKDAYS_CN = ('周一', '周二', '周三', '周四', '周五', '周六', '周日')
 
 exectime_internal = 0.0
 exectime_external = 0.0
@@ -855,15 +856,15 @@ class HTMLReportCreator(ReportCreator):
 		f.write(html_header(2, '按天/周统计'))
 		day_of_week = data.getActivityByDayOfWeek()
 		f.write('<div class="vtable"><table>')
-		f.write('<tr><th>Day</th><th>总提交数 (百分比%)</th></tr>')
+		f.write('<tr><th>Day  </th><th>  提交数 (%)</th></tr>')
 		fp = open(path + '/day_of_week.dat', 'w')
 		for d in range(0, 7):
 			commits = 0
 			if d in day_of_week:
 				commits = day_of_week[d]
-			fp.write('%d %s %d\n' % (d + 1, WEEKDAYS[d], commits))
+			fp.write('%d %s %d\n' % (d + 1, WEEKDAYS_CN[d], commits))
 			f.write('<tr>')
-			f.write('<th>%s</th>' % (WEEKDAYS[d]))
+			f.write('<th>%s</th>' % (WEEKDAYS_CN[d]))
 			if d in day_of_week:
 				f.write('<td>%d (%.2f%%)</td>' % (day_of_week[d], (100.0 * day_of_week[d]) / totalcommits))
 			else:
