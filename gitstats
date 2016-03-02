@@ -912,7 +912,7 @@ class HTMLReportCreator(ReportCreator):
 			commits = 0
 			if mm in data.activity_by_month_of_year:
 				commits = data.activity_by_month_of_year[mm]
-			f.write('<tr><td>%d</td><td>%d (%.2f %%)</td></tr>' % (MONTH_CN[mm], commits, (100.0 * commits) / data.getTotalCommits()))
+			f.write('<tr><td>%s</td><td>%d (%.2f %%)</td></tr>' % (MONTH_CN[mm], commits, (100.0 * commits) / data.getTotalCommits()))
 			fp.write('%d %d\n' % (mm, commits))
 		fp.close()
 		f.write('</table></div>')
