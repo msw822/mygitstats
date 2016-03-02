@@ -786,7 +786,7 @@ class HTMLReportCreator(ReportCreator):
 		# Weekly activity
 		WEEKS = 32
 		f.write(html_header(2, '按周统计'))
-		f.write('<p>最近 %d 周</p>' % WEEKS)
+		f.write('<p>最近 %d 周提交数</p>' % WEEKS)
 
 		# generate weeks to show (previous N weeks from now)
 		now = datetime.datetime.now()
@@ -819,10 +819,10 @@ class HTMLReportCreator(ReportCreator):
 		# Hour of Day
 		f.write(html_header(2, '按小时统计'))
 		hour_of_day = data.getActivityByHourOfDay()
-		f.write('<table><tr><th>Hour</th>')
+		f.write('<table><tr><th>小时</th>')
 		for i in range(0, 24):
 			f.write('<th>%d</th>' % i)
-		f.write('</tr>\n<tr><th>Commits</th>')
+		f.write('</tr>\n<tr><th>提交数</th>')
 		fp = open(path + '/hour_of_day.dat', 'w')
 		for i in range(0, 24):
 			if i in hour_of_day:
@@ -833,7 +833,7 @@ class HTMLReportCreator(ReportCreator):
 				f.write('<td>0</td>')
 				fp.write('%d 0\n' % i)
 		fp.close()
-		f.write('</tr>\n<tr><th>%</th>')
+		f.write('</tr>\n<tr><th>百分比</th>')
 		totalcommits = data.getTotalCommits()
 		for i in range(0, 24):
 			if i in hour_of_day:
@@ -1381,7 +1381,7 @@ plot """
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>GitStats - %s</title>
+	<title>中移在线 - %s</title>
 	<link rel="stylesheet" href="%s" type="text/css">
 	<meta name="generator" content="GitStats %s">
 	<script type="text/javascript" src="sortable.js"></script>
