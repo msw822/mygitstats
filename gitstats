@@ -817,7 +817,7 @@ class HTMLReportCreator(ReportCreator):
 		f.write('</tr></table>')
 
 		# Hour of Day
-		f.write(html_header(2, '按小时统计'))
+		f.write(html_header(2, '按小时/天统计'))
 		hour_of_day = data.getActivityByHourOfDay()
 		f.write('<table><tr><th>小时</th>')
 		for i in range(0, 24):
@@ -852,10 +852,10 @@ class HTMLReportCreator(ReportCreator):
 		fg.close()
 
 		# Day of Week
-		f.write(html_header(2, 'Day of Week'))
+		f.write(html_header(2, '按天/周统计'))
 		day_of_week = data.getActivityByDayOfWeek()
 		f.write('<div class="vtable"><table>')
-		f.write('<tr><th>Day</th><th>Total (%)</th></tr>')
+		f.write('<tr><th>Day</th><th>总提交数 (百分比%)</th></tr>')
 		fp = open(path + '/day_of_week.dat', 'w')
 		for d in range(0, 7):
 			commits = 0
