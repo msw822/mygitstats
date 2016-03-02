@@ -1025,7 +1025,7 @@ class HTMLReportCreator(ReportCreator):
 		# Authors :: Author of Month
 		f.write(html_header(2, '月度之星'))
 		f.write('<table class="sortable" id="aom">')
-		f.write('<tr><th>月份</th><th>Author</th><th>代码提交数 (%%)</th><th class="unsortable">其余 %d 名</th><th>月度开发者数量</th></tr>' % conf['authors_top'])
+		f.write('<tr><th>月份</th><th>开发者</th><th>代码提交数 (%%)</th><th class="unsortable">其余 %d 名</th><th>月度开发者数量</th></tr>' % conf['authors_top'])
 		for yymm in reversed(sorted(data.author_of_month.keys())):
 			authordict = data.author_of_month[yymm]
 			authors = getkeyssortedbyvalues(authordict)
@@ -1037,7 +1037,7 @@ class HTMLReportCreator(ReportCreator):
 		f.write('</table>')
 
 		f.write(html_header(2, '年度之星'))
-		f.write('<table class="sortable" id="aoy"><tr><th>年度</th><th>Author</th><th>代码提交数 (%%)</th><th class="unsortable">Next top %d</th><th>年度开发者数</th></tr>' % conf['authors_top'])
+		f.write('<table class="sortable" id="aoy"><tr><th>年度</th><th>开发者</th><th>代码提交数 (%%)</th><th class="unsortable">其余 %d 名</th><th>年度开发者数</th></tr>' % conf['authors_top'])
 		for yy in reversed(sorted(data.author_of_year.keys())):
 			authordict = data.author_of_year[yy]
 			authors = getkeyssortedbyvalues(authordict)
