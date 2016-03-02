@@ -779,7 +779,7 @@ class HTMLReportCreator(ReportCreator):
 		# Activity
 		f = open(path + '/activity.html', 'w')
 		self.printHeader(f)
-		f.write('<h1>活动统计</h1>')
+		f.write('<h1>开发活动统计</h1>')
 		self.printNav(f)
 
 		#f.write('<h2>Last 30 days</h2>')
@@ -919,8 +919,8 @@ class HTMLReportCreator(ReportCreator):
 		f.write('<img src="month_of_year.png" alt="Month of Year">')
 
 		# Commits by year/month
-		f.write(html_header(2, '按月/年统计'))
-		f.write('<div class="vtable"><table><tr><th>Month</th><th>Commits</th><th>Lines added</th><th>Lines removed</th></tr>')
+		f.write(html_header(2, '按年-月统计'))
+		f.write('<div class="vtable"><table><tr><th>年-月</th><th>提交数</th><th>添加代码行数</th><th>删除代码行数</th></tr>')
 		for yymm in reversed(sorted(data.commits_by_month.keys())):
 			f.write('<tr><td>%s</td><td>%d</td><td>%d</td><td>%d</td></tr>' % (yymm, data.commits_by_month.get(yymm,0), data.lines_added_by_month.get(yymm,0), data.lines_removed_by_month.get(yymm,0)))
 		f.write('</table></div>')
@@ -980,7 +980,7 @@ class HTMLReportCreator(ReportCreator):
 			rest = allauthors[conf['max_authors']:]
 			f.write('<p class="moreauthors">These didn\'t make it to the top: %s</p>' % ', '.join(rest))
 
-		f.write(html_header(2, '开发者累计添加代码行数统计'))
+		f.write(html_header(2, '开发者代码贡献行数统计'))
 		f.write('<img src="lines_of_code_by_author.png" alt="Lines of code per Author">')
 		if len(allauthors) > conf['max_authors']:
 			f.write('<p class="moreauthors">Only top %d authors shown</p>' % conf['max_authors'])
@@ -1396,8 +1396,8 @@ plot """
 		f.write("""
 <div class="nav">
 <ul>
-<li><a href="index.html">整体统计</a></li>
-<li><a href="activity.html">活动统计</a></li>
+<li><a href="index.html">基本统计</a></li>
+<li><a href="activity.html">开发活动统计</a></li>
 <li><a href="authors.html">开发人员统计</a></li>
 <li><a href="files.html">文件统计</a></li>
 <li><a href="lines.html">行数统计</a></li>
