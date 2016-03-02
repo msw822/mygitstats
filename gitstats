@@ -28,7 +28,9 @@ os.environ['LC_ALL'] = 'C'
 GNUPLOT_COMMON = 'set terminal png transparent size 640,240\nset size 1.0,1.0\n'
 ON_LINUX = (platform.system() == 'Linux')
 WEEKDAYS = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+#add by mashaowei
 WEEKDAYS_CN = ('周一', '周二', '周三', '周四', '周五', '周六', '周日')
+MONTH_CN = ('一月', '二月', '三月', '四月', '五月', '六月', '七月','八月', '九月', '十月', '十一月', '十二月')
 
 exectime_internal = 0.0
 exectime_external = 0.0
@@ -777,7 +779,7 @@ class HTMLReportCreator(ReportCreator):
 		# Activity
 		f = open(path + '/activity.html', 'w')
 		self.printHeader(f)
-		f.write('<h1>Activity</h1>')
+		f.write('<h1>活动统计</h1>')
 		self.printNav(f)
 
 		#f.write('<h2>Last 30 days</h2>')
@@ -875,16 +877,16 @@ class HTMLReportCreator(ReportCreator):
 		fp.close()
 
 		# Hour of Week
-		f.write(html_header(2, 'Hour of Week'))
+		f.write(html_header(2, '按小时/周统计'))
 		f.write('<table>')
 
-		f.write('<tr><th>Weekday</th>')
+		f.write('<tr><th>工作日</th>')
 		for hour in range(0, 24):
 			f.write('<th>%d</th>' % (hour))
 		f.write('</tr>')
 
 		for weekday in range(0, 7):
-			f.write('<tr><th>%s</th>' % (WEEKDAYS[weekday]))
+			f.write('<tr><th>%s</th>' % (WEEKDAYS_CN[weekday]))
 			for hour in range(0, 24):
 				try:
 					commits = data.activity_by_hour_of_week[weekday][hour]
@@ -902,15 +904,15 @@ class HTMLReportCreator(ReportCreator):
 		f.write('</table>')
 
 		# Month of Year
-		f.write(html_header(2, 'Month of Year'))
+		f.write(html_header(2, '按月/年统计'))
 		f.write('<div class="vtable"><table>')
-		f.write('<tr><th>Month</th><th>Commits (%)</th></tr>')
+		f.write('<tr><th>Month</th><th>提交量 (%)</th></tr>')
 		fp = open (path + '/month_of_year.dat', 'w')
 		for mm in range(1, 13):
 			commits = 0
 			if mm in data.activity_by_month_of_year:
 				commits = data.activity_by_month_of_year[mm]
-			f.write('<tr><td>%d</td><td>%d (%.2f %%)</td></tr>' % (mm, commits, (100.0 * commits) / data.getTotalCommits()))
+			f.write('<tr><td>%d</td><td>%d (%.2f %%)</td></tr>' % (MONTH_CN[mm], commits, (100.0 * commits) / data.getTotalCommits()))
 			fp.write('%d %d\n' % (mm, commits))
 		fp.close()
 		f.write('</table></div>')
