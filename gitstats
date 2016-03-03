@@ -1329,7 +1329,7 @@ set grid y
 set ylabel "Lines"
 set xtics rotate
 set bmargin 6
-set term png font '/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc,14'  
+set term png font '/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc,10'  
 plot """
 )
 		i = 1
