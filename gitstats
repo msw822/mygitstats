@@ -969,7 +969,7 @@ class HTMLReportCreator(ReportCreator):
 		f.write(html_header(2, '开发人员列表'))
 
 		f.write('<table class="authors sortable" id="authors">')
-		f.write('<tr><th>开发人员</th><th>提交量 (%)</th><th>添加+行数</th><th>删除-行数</th><th>第一次提交</th><th>最后一次提交</th><th class="unsortable">时长</th><th>活跃天数</th><th># 排行榜</th></tr>')
+		f.write('<tr><th>开发人员</th><th>提交量 (%)</th><th>添加+行数</th><th>删除-行数</th><th>第一次提交</th><th>最后一次提交</th><th class="unsortable">时长</th><th>活跃天数</th><th># 排行</th></tr>')
 		for author in data.getAuthors(conf['max_authors']):
 			info = data.getAuthorInfo(author)
 			f.write('<tr><td>%s</td><td>%d (%.2f%%)</td><td>%d</td><td>%d</td><td>%s</td><td>%s</td><td>%s</td><td>%d</td><td>%d</td></tr>' % (author, info['commits'], info['commits_frac'], info['lines_added'], info['lines_removed'], info['date_first'], info['date_last'], info['timedelta'], len(info['active_days']), info['place_by_commits']))
@@ -1359,6 +1359,7 @@ set grid y
 set ylabel "Commits"
 set xtics rotate
 set bmargin 6
+set term png font '/usr/share/fonts/wqy-zenhei/wqy-zenhei.ttc,10' 
 plot """
 )
 		i = 1
