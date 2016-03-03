@@ -767,7 +767,7 @@ class HTMLReportCreator(ReportCreator):
 		f.write('<dt>报告周期</dt><dd>从 %s 到 %s</dd>' % (data.getFirstCommitDate().strftime(format), data.getLastCommitDate().strftime(format)))
 		f.write('<dt>时长</dt><dd> 总天数：%d  ,  活跃天数： %d   ，  百分比：(%3.2f%%)</dd>' % (data.getCommitDeltaDays(), len(data.getActiveDays()), (100.0 * len(data.getActiveDays()) / data.getCommitDeltaDays())))
 		f.write('<dt>总文件数</dt><dd>%s</dd>' % data.getTotalFiles())
-		f.write('<dt>总行数of Code</dt><dd>%s (%d 添加, %d 删除)</dd>' % (data.getTotalLOC(), data.total_lines_added, data.total_lines_removed))
+		f.write('<dt>总行数</dt><dd>%s (%d 添加, %d 删除)</dd>' % (data.getTotalLOC(), data.total_lines_added, data.total_lines_removed))
 		f.write('<dt>总提交数</dt><dd>%s (活跃天平均每天 %.1f 个提交次数,  整体平均每天%.1f 个提交次数)</dd>' % (data.getTotalCommits(), float(data.getTotalCommits()) / len(data.getActiveDays()), float(data.getTotalCommits()) / data.getCommitDeltaDays()))
 		f.write('<dt>开发人员</dt><dd>%s (平均每个开发人员提交次数 %.1f 个)</dd>' % (data.getTotalAuthors(), (1.0 * data.getTotalCommits()) / data.getTotalAuthors()))
 		f.write('</dl>')
